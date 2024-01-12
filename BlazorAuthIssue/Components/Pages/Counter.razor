@@ -1,5 +1,8 @@
-﻿@page "/counter"
+﻿@using Microsoft.AspNetCore.Authorization
+
+@page "/counter/groups/{GroupId}"
 @rendermode InteractiveServer
+@attribute [Authorize(Policy = "GroupPolicy")]
 
 <PageTitle>Counter</PageTitle>
 
@@ -11,6 +14,10 @@
 
 @code {
     private int currentCount = 0;
+
+    [Parameter]
+    public string GroupId { get; set; } = "FAILEDTOPARSEURL";
+
 
     private void IncrementCount()
     {
